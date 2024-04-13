@@ -6,22 +6,22 @@
     offset = 0x19
     padding = 2
     horizontal_padding = 2
-    transparency = 25
+    transparency = 5
     font = MesloLGLMono 12
     format = "<b>%s</b>\n%b"
 
 [urgency_low]
     background = "#000000"
     foreground = "#ff0cd2"
-    timeout = 15 
+    timeout = 20 
 
 [urgency_normal]
     foreground = "#ff0cd2"
     background = "#000000"
-    timeout = 20
+    timeout = 25
 
 [urgency_critical]
     background = "#1cc24d"
     foreground = "#ebdbb2"
     frame_color = "#fabd2f"
-    timeout = 25
+    timeout = 30
