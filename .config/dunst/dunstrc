@@ -1,11 +1,11 @@
 [global]
     monitor = 0
     follow = keyboard
-    width = 370
-    height = 350
+    width = 350
+    height = 400
     offset = 0x19
-    padding = 2
-    horizontal_padding = 2
+    padding = 0
+    horizontal_padding = 0 
     transparency = 5
     font = MesloLGLMono 12
     format = "<b>%s</b>\n%b"
@@ -13,11 +13,13 @@
 [urgency_low]
     background = "#000000"
     foreground = "#ff0cd2"
+    frame_color = "#ff0cd2"
     timeout = 20 
 
 [urgency_normal]
     foreground = "#ff0cd2"
     background = "#000000"
+    frame_color = "#ff0cd2"
     timeout = 25
 
 [urgency_critical]
