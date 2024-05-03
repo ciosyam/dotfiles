@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Define the command to kill and restart pipewire
+pidof pipewire | awk '{print $2}' | xargs kill
