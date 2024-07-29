@@ -1,6 +1,3 @@
--- Credits to original theme for existing https://github.com/shaunsingh/oxocarbon.nvim
--- this is a modified version of it
-
 local M = {}
 
 M.base_30 = {
@@ -65,6 +62,6 @@ M.polish_hl = {
 
 M.type = "dark"
 
-M = require("base46").override_theme(M, "oxocarbon")
+M = require("base46").override_theme(M, "tetr")
 
 return M
