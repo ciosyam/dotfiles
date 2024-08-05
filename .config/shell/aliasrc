@@ -49,10 +49,10 @@ alias \
 	e="$EDITOR" \
 	v="$EDITOR" \
 	p="pacman" \
-	xi="sudo xbps-install" \
+	rsshd="sudo systemctl restart sshd" \
 	xr="sudo xbps-remove -R" \
 	xq="xbps-query" \
-	z="zathura"
+	z="zathura" \
 
 alias \
 	lf="lfub" \
