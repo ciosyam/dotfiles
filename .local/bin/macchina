@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Ensure PATH is set correctly
+export PATH=$HOME/.local/share/cargo/bin:$PATH
+
+# Open st, run macchina, and keep the terminal open with zsh
+st -e zsh -c 'macchina; exec zsh'

@@ -2,7 +2,7 @@
 Description=Prevent system from sleeping when lid is closed
 
 [Service]
-ExecStart=/home/tetr-a/.local/bin/prevent-sleep.sh
+ExecStart=/home/tetr-a/.local/bin/prevent-sleep
 
 [Install]
 WantedBy=multi-user.target
