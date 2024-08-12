@@ -29,10 +29,11 @@ cfl="$EDITOR /home/tetr/.config/lf/lfrc" \
 cfL="$EDITOR /home/tetr/.config/lf/scope" \
 cfX="$EDITOR /home/tetr/.config/nsxiv/exec/key-handler" \
 brain="cd /home/tetr/brain.exe && $EDITOR" \
-cpu-high="sudo auto-cpufreq --force=performance" \
-cpu-low="sudo auto-cpufreq --force=powersave" \
+cpu+="sudo auto-cpufreq --force=performance" \
+cpu-="sudo auto-cpufreq --force=powersave" \
+cpus="sudo auto-cpufreq --stats" \
 normal="xrandr --output eDP1 --rotate normal" \
 left="xrandr --output eDP1 --rotate left" \
 right="xrandr --output eDP1 --rotate right" \
-start-internet="sudo systemctl start NetworkManager.service" \
-stop-internet="sudo systemctl stop NetworkManager.service" \
+internet+="sudo systemctl start NetworkManager.service" \
+internet-="sudo systemctl stop NetworkManager.service" \
