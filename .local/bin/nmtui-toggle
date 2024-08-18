@@ -1,0 +1,28 @@
+#!/bin/sh
+
+ctl=$(readlink -f /sbin/init | grep -q systemd && echo systemctl || echo loginctl)
+
+# Check if NetworkManager is running
+if pgrep -x NetworkManager &> /dev/null; then
+    action="stop"
+    message="stop internet?"
+    notify="internet (-)"
+else
+    action="start"
+    message="start internet?"
+    notify="internet (X)"
+fi
+
+# Use dmenu to get user input
+if echo -e "Yes\nNo" | dmenu -i -p "$message" | grep -q "Yes"; then
+    if sudo $ctl $action NetworkManager.service; then
+        notify-send "$notify"
+    else
+        notify-send "Error" "Failed to execute the command."
+    fi
+else
+    notify-send "Cancelled" "Operation was cancelled."
+fi
+
+# Notify the status bar
+sleep 3 && pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}"
