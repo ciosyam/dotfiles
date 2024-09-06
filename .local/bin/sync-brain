@@ -1,5 +1,4 @@
 #!/bin/bash
-# sync - Script to trigger Syncthing sync
 
 # Replace with your Syncthing API key
 API_KEY="JWSciAWkPWbgWxFsgaUZ6ThDYKdAttiM"
@@ -8,5 +7,7 @@ BASE_URL="http://127.0.0.1:8384"
 
 # Trigger sync for all folders
 curl -X POST -H "X-API-Key: ${API_KEY}" "${BASE_URL}/rest/db/scan?folder="
+
+notify-send "🧠 Synced" "Brain synced"
 
 exit 0

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Directory containing icons
+ICON_DIR="/usr/share/icons/Adwaita/16x16/places/"
+# Output directory for recolored icons
+OUTPUT_DIR="/usr/share/icons/Adwaita/16x16/places2/"
+# Desired color
+COLOR="#ff00ff"
+
+# Create output directory if it does not exist
+mkdir -p "$OUTPUT_DIR"
+
+# Loop through all PNG files in the icon directory
+for ICON in "$ICON_DIR"/*.png; do
+    # Extract filename without extension
+    BASENAME=$(basename "$ICON" .png)
+    # Recolor the icon and save it to the output directory
+    magick "$ICON" -fill "$COLOR" -colorize 100% "$OUTPUT_DIR/${BASENAME}-recolored.png"
+done
+
+echo "Recoloring complete. Check the $OUTPUT_DIR directory."

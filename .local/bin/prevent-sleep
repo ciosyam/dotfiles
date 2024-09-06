@@ -1,8 +1,38 @@
 #!/bin/env
 
+# Script to prevent system from sleeping when the lid is closed
+
+# Define the script content
+PREVENT_SLEEP_SCRIPT="#!/bin/bash
+
 # Prevent the system from suspending and screen blanking when the lid is closed
 while true; do
     sleep 5
     grep -q closed /proc/acpi/button/lid/*/state && xset s off -dpms
 done
+"
 
+# Define the service content
+SERVICE_FILE_CONTENT="[Unit]
+Description=Prevent system from sleeping when lid is closed
+
+[Service]
+ExecStart=/usr/local/bin/prevent-sleep.sh
+
+[Install]
+WantedBy=multi-user.target
+"
+
+# Create the prevent-sleep.sh script
+echo "$PREVENT_SLEEP_SCRIPT" | sudo tee /usr/local/bin/prevent-sleep.sh > /dev/null
+sudo chmod +x /usr/local/bin/prevent-sleep.sh
+
+# Create the systemd service file
+echo "$SERVICE_FILE_CONTENT" | sudo tee /etc/systemd/system/prevent-sleep.service > /dev/null
+
+# Enable and start the systemd service
+sudo systemctl enable prevent-sleep.service
+sudo systemctl start prevent-sleep.service
+
+# Confirm success
+echo "Lid closing prevention setup complete. System will no longer sleep or blank the screen when the lid is closed."

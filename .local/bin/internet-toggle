@@ -6,11 +6,11 @@ ctl=$(readlink -f /sbin/init | grep -q systemd && echo systemctl || echo loginct
 if pgrep -x NetworkManager &> /dev/null; then
     action="stop"
     message="stop internet?"
-    notify="internet (-)"
+    notify="internet off"
 else
     action="start"
     message="start internet?"
-    notify="internet (X)"
+    notify="internet on"
 fi
 
 # Use dmenu to get user input

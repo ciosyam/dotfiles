@@ -1,0 +1,9 @@
+#!/bin/bash
+
+pidof pipewire | awk '{print $2}' | xargs kill
+
+if pipewire; then
+    notify-send "🎵 pipe killed successfully"
+else
+    notify-send "⚠️  pipekill failed"
+fi

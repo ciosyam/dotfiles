@@ -1,0 +1,93 @@
+/* General Background and Font Styles */
+* {
+    background-color: #000000; /* Set background to black */
+    color: #ffffff; /* Light text color */
+    font-family: "MesloLGLNerdFontMono", monospace;
+    font-size: 10pt;
+}
+
+/* Button Styles */
+.button {
+    background-color: #ff5aff;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.button:hover {
+    background-color: #ff83ff;
+}
+
+/* Entry Styles (Text Fields) */
+.entry {
+    background-color: #781e77;
+    color: #ffe2ff;
+    border: 1px solid #501a4f;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* Toolbar Styles */
+.toolbar {
+    background-color: #000000; /* Toolbar background to match general background */
+}
+
+/* Scrollbar Styles */
+.scrollbar {
+    background-color: #501a4f;
+    border-radius: 6px;
+}
+
+.scrollbar slider {
+    background-color: #ff5aff;
+    border-radius: 6px;
+}
+
+/* Header Bars */
+.header-bar {
+    background-color: #781e77;
+    color: #ffe2ff;
+}
+
+.header-bar .title {
+    color: #ff83ff;
+}
+
+/* Switches */
+.switch {
+    background-color: #ff00ff;
+}
+
+.switch:checked {
+    background-color: #d018d0;
+}
+
+/* Dialogs */
+.dialog {
+    background-color: #000000; /* Dialog background to match general background */
+    border: 1px solid #501a4f;
+}
+
+.dialog .title {
+    color: #ff00ff;
+}
+
+/* Menu and Menu Item Styles */
+.menu {
+    padding: 0; /* Remove default padding */
+}
+
+.menuitem {
+    padding: 5px 15px; /* Add padding to increase spacing */
+    margin: 2px 0; /* Optional: Add vertical margin between items */
+}
+
+/* Menubar (Top Menu Bar) */
+.menubar {
+    padding: 0; /* Remove default padding */
+}
+
+.menubar .menuitem {
+    padding: 5px 15px; /* Add padding to individual menu items */
+    margin: 0; /* Adjust margin if needed */
+}
