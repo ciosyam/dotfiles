@@ -6,8 +6,8 @@ sudo auto-cpufreq --force=performance
 # Check if the command was successful
 if [ $? -eq 0 ]; then
     # Send a notification indicating success
-    notify-send "CPU set to performance mode"
+    notify-send -u "low" "CPU set to performance"
 else
     # Send a notification indicating failure
-    notify-send "Failed to set CPU to performance"
+    notify-send "low" "Failed to set CPU to performance"
 fi

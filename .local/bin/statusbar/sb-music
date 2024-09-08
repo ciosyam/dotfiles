@@ -2,7 +2,7 @@
 
 # Function to filter MPC status
 filter_mpc() {
-    sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d;/^ERROR/Q" | paste -sd ' ' -
+    sed "/^volume:/d; s/\[paused\].*//g; /\[playing\].*/d; /^ERROR/Q" | paste -sd ' ' -
 }
 
 # Get current song and status from MPC
@@ -10,3 +10,6 @@ current_song=$(mpc status | filter_mpc)
 
 # Output the combined information with the emoji
 echo "$current_song"
+
+# Notify the status bar immediately
+pkill -USR1 "${STATUSBAR:-dwmblocks}"

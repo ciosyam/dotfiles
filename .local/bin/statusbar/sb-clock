@@ -3,7 +3,7 @@
 clock=$(date '+%I')
 
 case $BLOCK_BUTTON in
-	1) notify-send "This Month" "$(cal | sed "s/\<$(date +'%e')\>/<b><span color='red'>&<\/span><\/b>/")" && notify-send "Get Things Done" "$(calcurse -t)" ;;
+	1) notify-send -u "low" "This Month" "$(cal | sed "s/\<$(date +'%e')\>/<b><span color='red'>&<\/span><\/b>/")" && notify-send -u "low" "Get Things Done" "$(calcurse -t)" ;;
 	2) setsid -f "$TERMINAL" -e calcurse ;;
 esac
 

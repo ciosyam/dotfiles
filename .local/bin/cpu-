@@ -6,8 +6,8 @@ sudo auto-cpufreq --force=powersave
 # Check if the command was successful
 if [ $? -eq 0 ]; then
     # Send a notification indicating success
-    notify-send "CPU set to powersave"
+    notify-send -u "low" "CPU set to powersave"
 else
     # Send a notification indicating failure
-    notify-send "Failed to set CPU to powersave"
+    notify-send "low" "Failed to set CPU to powersave"
 fi

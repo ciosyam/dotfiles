@@ -27,3 +27,6 @@ volume_info=$(pulsemixer --get-volume | awk '{print $1}' | awk '{printf "%d%%", 
 
 # Output the combined information with the emoji
 echo "$emoji $volume_info"
+
+# Send a signal to dwmblocks to update the volume block
+pkill -RTMIN+16 dwmblocks

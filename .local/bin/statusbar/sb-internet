@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#
 # Check if NetworkManager service is active
 if systemctl is-active --quiet NetworkManager; then
     status_icon=" "
@@ -12,13 +12,12 @@ case $BLOCK_BUTTON in
         # Toggle NetworkManager service
         if systemctl is-active --quiet NetworkManager; then
             sudo systemctl stop NetworkManager
+            notify-send -u "low" " internet off"
         else
             sudo systemctl start NetworkManager
+            notify-send -u "low" " internet on"
         fi
         pkill -RTMIN+4 dwmblocks ;;
-    3)
-        # Show a notification explaining the functionality
-        notify-send "Network Manager Module" "Left-click to toggle NetworkManager service on or off" ;;
 esac
 
 echo "$status_icon"

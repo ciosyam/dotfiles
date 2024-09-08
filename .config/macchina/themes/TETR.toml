@@ -3,9 +3,9 @@
 spacing         = 2
 padding         = 0
 hide_ascii      = false
-separator       = "<->"
-key_color       = "#F50093"
-separator_color = "#F61067"
+separator       = "<$>"
+key_color       = "#ff00ff"
+separator_color = "#00ff00"
 
 [palette]
 type = "Full"
@@ -24,7 +24,7 @@ key_color       = false
 separator_color = false
 
 [keys]
-host            = "TETR"
+host            = "Host"
 kernel          = "Kernel"
 battery         = "Battery"
 os              = "OS"
@@ -45,5 +45,5 @@ gpu             = "GPU"
 disk_space      = "Disk Space"
 
 [custom_ascii]
-color = "#ff0cd2"
+color = "#e619e5"
 path = "/home/tetr/.config/macchina/ascii/penta_medium.ascii"
