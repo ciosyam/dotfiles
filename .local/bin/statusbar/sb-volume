@@ -14,11 +14,14 @@ case "$sink_description" in
   "PCM2902 Audio Codec Analog Stereo")
     emoji=" "
     ;;
-  "Bluetooth")
-    emoji="📶"
+  "Built-in Audio Digital Stereo (HDMI)")
+    emoji=" "
+    ;;
+  "Built-in Audio Analog Stereo")
+    emoji=" "
     ;;
   *)
-    emoji=" " # Default emoji if no match is found
+    emoji=" " # Default emoji if no match is found
     ;;
 esac
 

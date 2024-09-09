@@ -2,7 +2,12 @@
 
 # Function to filter MPC status
 filter_mpc() {
-    sed "/^volume:/d; s/\[paused\].*//g; /\[playing\].*/d; /^ERROR/Q" | paste -sd ' ' -
+    # Extract the song title and include the pause emoji if paused
+    awk '
+    /^[a-zA-Z]/ { split($0, a, " - "); song_title=a[2] }
+    /^\[playing\]/ { print song_title }
+    /^[volume|repeat|random|single|consume]/ { exit }
+    ' | head -n 1
 }
 
 # Get current song and status from MPC
