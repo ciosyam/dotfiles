@@ -1,35 +1,42 @@
 #!/bin/sh
 
-# Get the currently active sink (output device) name
-current_sink=$(pactl info | grep "Default Sink:" | awk '{print $3}')
+# Get the full pactl info in one call and filter relevant info
+pactl_output=$(pactl list sinks)
 
-# Get the sink description
-sink_description=$(pactl list sinks | grep -A 15 "Name: $current_sink" | grep "Description:" | awk -F "Description: " '{print $2}')
+# Extract the default sink and description
+current_sink=$(pactl info | awk -F": " '/Default Sink/ {print $2}')
+sink_description=$(echo "$pactl_output" | awk -v sink="$current_sink" '
+    $1 == "Name:" && $2 == sink {flag=1} 
+    flag && /Description:/ {print substr($0, index($0,$2)); exit}
+')
 
 # Define your emoji mappings based on sink description
 case "$sink_description" in
-  "FiiO BTR3")
+  *"FiiO BTR3"*)
     emoji=""
     ;;
-  "PCM2902 Audio Codec Analog Stereo")
-    emoji=" "
+  *"PCM2902 Audio Codec Analog Stereo"*)
+    emoji=""
     ;;
-  "Built-in Audio Digital Stereo (HDMI)")
-    emoji=" "
+  *"Built-in Audio Digital Stereo (HDMI)"*)
+    emoji=""
     ;;
-  "Built-in Audio Analog Stereo")
-    emoji=" "
+  *"Built-in Audio Analog Stereo"*)
+    emoji=""
     ;;
   *)
-    emoji=" " # Default emoji if no match is found
+    emoji="" # Default emoji if no match is found
     ;;
 esac
 
-# Get the volume level from pulsemixer
-volume_info=$(pulsemixer --get-volume | awk '{print $1}' | awk '{printf "%d%%", $1}')
+# Extract the volume level from the pactl output
+volume_level=$(echo "$pactl_output" | awk -v sink="$current_sink" '
+    $1 == "Name:" && $2 == sink {flag=1}
+    flag && /Volume:/ {print $5; exit}
+')
 
 # Output the combined information with the emoji
-echo "$emoji $volume_info"
+echo "$emoji $volume_level"
 
-# Send a signal to dwmblocks to update the volume block
-pkill -RTMIN+16 dwmblocks
+# Notify the status bar to update the volume block
+pkill -USR5 "${STATUSBAR:-dwmblocks}"

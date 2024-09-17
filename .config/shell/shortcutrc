@@ -2,7 +2,6 @@
 alias cf="cd /home/tetr/.config && ls -A" \
 D="cd /home/tetr/Downloads && ls -A" \
 r="cd /home/tetr/Repo/ && ls -A" \
-rr="cd /home/tetr/Repo/Rust/ && ls -A" \
 m="cd /home/tetr/Music && ls -A" \
 kmn="cd /mnt && ls -A" \
 sc="cd /home/tetr/.local/bin && ls -A" \

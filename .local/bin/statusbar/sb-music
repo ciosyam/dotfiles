@@ -1,20 +1,18 @@
 #!/bin/sh
 
-# Function to filter MPC status
-filter_mpc() {
-    # Extract the song title and include the pause emoji if paused
-    awk '
-    /^[a-zA-Z]/ { split($0, a, " - "); song_title=a[2] }
-    /^\[playing\]/ { print song_title }
-    /^[volume|repeat|random|single|consume]/ { exit }
-    ' | head -n 1
-}
+# Get the current MPC status in one call
+mpc_output=$(mpc status)
 
-# Get current song and status from MPC
-current_song=$(mpc status | filter_mpc)
+# Exit if music is paused (detected by '[paused]')
+case "$mpc_output" in
+    *"[paused]"*) exit 0 ;;
+esac
 
-# Output the combined information with the emoji
-echo "$current_song"
+# Extract and show only the song title (removing artist name and any unwanted lines)
+current_song=$(echo "$mpc_output" | sed "/^volume:/d; s/.* - //; /\[playing\].*/d; /^ERROR/Q" | paste -sd ' ' -)
+
+# Output the song title with the note emoji
+echo "  $current_song"
 
 # Notify the status bar immediately
 pkill -USR1 "${STATUSBAR:-dwmblocks}"
