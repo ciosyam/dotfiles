@@ -1,4 +1,0 @@
-#!/bin/sh
-yazi "$@"  # Run yazi
-last_dir=$(pwd)  # Capture the directory after yazi exits
-cd "$last_dir"  # Change to the captured directory

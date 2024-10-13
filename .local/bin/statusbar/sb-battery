@@ -1,23 +1,53 @@
 #!/bin/sh
 
-# Define a static emoji
-status_icon=" "
+# Icons for different battery states
+charging_icon=" "
+full_icon=" "
+high_icon=" "
+medium_icon=" "
+low_icon=" "
+critical_icon=" "
 
-# Initialize variable for total battery percentage
+# Initialize variables
 total_percentage=0
 count=0
+charging=false
 
-# Loop through all attached batteries and calculate the average percentage
+# Loop through batteries
 for battery in /sys/class/power_supply/BAT?*; do
-    if [ -e "$battery/capacity" ]; then
-        capacity="$(cat "$battery/capacity" 2>/dev/null)"
+    # Read capacity directly and add it to the total
+    [ -r "$battery/capacity" ] && {
+        read -r capacity < "$battery/capacity"
         total_percentage=$((total_percentage + capacity))
         count=$((count + 1))
-    fi
+    }
+
+    # Check charging status only once
+    [ "$charging" = false ] && [ -r "$battery/status" ] && {
+        read -r status < "$battery/status"
+        [ "$status" = "Charging" ] && charging=true
+    }
 done
 
-# Calculate average battery percentage and output if batteries are detected
-if [ "$count" -gt 0 ]; then
+# Calculate and output the average if any batteries were found
+[ "$count" -gt 0 ] && {
     average_percentage=$((total_percentage / count))
-    echo "$status_icon $average_percentage%"
-fi
+
+    # Determine icon
+    if [ "$charging" = true ]; then
+        status_icon="$charging_icon"
+    elif [ "$average_percentage" -ge 80 ]; then
+        status_icon="$full_icon"
+    elif [ "$average_percentage" -ge 60 ]; then
+        status_icon="$high_icon"
+    elif [ "$average_percentage" -ge 40 ]; then
+        status_icon="$medium_icon"
+    elif [ "$average_percentage" -ge 20 ]; then
+        status_icon="$low_icon"
+    else
+        status_icon="$critical_icon"
+    fi
+
+    # Output the status icon and average percentage
+    printf "%s %d%%\n" "$status_icon" "$average_percentage"
+}
