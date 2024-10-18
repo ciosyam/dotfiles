@@ -3548,7 +3548,7 @@ menu menuitem:hover,
 .context-menu menuitem:hover {
   transition: none;
   background-color: #2d2633;
-  color: #bd84ff;
+  color: #e900ea;
   font-weight: 500;
 }
 
