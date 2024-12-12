@@ -2,7 +2,7 @@
     monitor = 0
     follow = keyboard
     width = 200
-    height = 400
+    height = 100
     offset = 0x30
     padding = 2
     horizontal_padding = 2 
@@ -13,19 +13,19 @@
     frame_width = 1
 
 [urgency_low]
-    foreground = "#00c4ff"
+    foreground = "#b814b8"
     background = "#000000"
-    frame_color = "#501a4f"
+    frame_color = "#b814b8"
     timeout = 5
 
 [urgency_normal]
-    foreground = "#00ff00"
+    foreground = "#00c4ff"
     background = "#000000"
-    frame_color = "#501a4f"
+    frame_color = "#b814b8"
     timeout = 10
 
 [urgency_critical]
-    foreground = "#ff0039"
+    foreground = "#ff00ff"
     background = "#000000"
-    frame_color = "#501a4f"
+    frame_color = "#b814b8"
     timeout = 15
