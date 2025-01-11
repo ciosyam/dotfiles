@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Decrease volume
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
+# Get the current volume
+volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '/Volume/ {print $5}')
+
+# Display a notification with low urgency and replace old ones
+notify-send -r 1234 "Volume: $volume"
