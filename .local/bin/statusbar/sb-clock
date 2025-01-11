@@ -6,7 +6,7 @@ icon=" "
 clock=$(date '+%I:%M %p')
 
 case $BLOCK_BUTTON in
-    1) notify-send -u "low" "This Month" "$(cal | sed "s/\<$(date +'%e')\>/<b><span color='red'>&<\/span><\/b>/")" && notify-send -u "critical" "Get Things Done" "$(calcurse -t)" ;;
+    1) notify-send -u "low" "$(cal | sed "s/\<$(date +'%e')\>/<b><span color='red'>&<\/span><\/b>/")" && notify-send -u "critical" "$(calcurse -t)" ;;
     2) setsid -f "$TERMINAL" -e calcurse ;;
 esac
 

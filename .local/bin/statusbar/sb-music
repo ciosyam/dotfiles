@@ -3,13 +3,18 @@
 # Get the current MPC status in one call
 mpc_output=$(mpc status)
 
-# Exit if music is paused (detected by '[paused]')
+# Exit if music is paused or MPD is idle (detected by '[paused]' or '[stopped]')
 case "$mpc_output" in
-    *"[paused]"*) exit 0 ;;
+    *"[paused]"*|*"[stopped]"*) exit 0 ;;
 esac
 
 # Extract and show only the song title (removing artist name and any unwanted lines)
 current_song=$(echo "$mpc_output" | sed "/^volume:/d; s/.* - //; /\[playing\].*/d; /^ERROR/Q" | paste -sd ' ' -)
+
+# If no song title is detected, exit gracefully
+if [ -z "$current_song" ]; then
+    exit 0
+fi
 
 # Output the song title with the note emoji
 echo "  $current_song"

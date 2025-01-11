@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Open st, and run surge 
+st -e zsh -c 'surge-xt-cli --audio-interface=1.0 --midi-input=1 --buffer-size=128 --sample-rate=48000'

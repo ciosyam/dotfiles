@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Open st, run yazi, and keep the terminal open with zsh
+st -e zsh -c 'yazi; exec zsh'

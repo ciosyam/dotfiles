@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Default values
+SVG_DIR="/home/tetr/Downloads/Adwaita/scalable/places/"  # Directory containing SVG files
+OUTPUT_DIR="/home/tetr/Downloads/Adwaita/scalable/16x16/"  # Output directory for PNG files
+
+# Parse command line arguments
+while getopts "i:o:" opt; do
+    case $opt in
+        i) SVG_DIR="$OPTARG" ;;
+        o) OUTPUT_DIR="$OPTARG" ;;
+        *) echo "Usage: $0 [-i svg_directory] [-o output_directory]"; exit 1 ;;
+    esac
+done
+
+# Create output directory if it does not exist
+mkdir -p "$OUTPUT_DIR"
+
+# Loop through all SVG files in the specified directory
+for SVG in "$SVG_DIR"/*.svg; do
+    # Check if any SVG files exist
+    if [[ ! -f "$SVG" ]]; then
+        echo "No SVG files found in $SVG_DIR"
+        exit 1
+    fi
+    
+    # Extract filename without extension
+    BASENAME=$(basename "$SVG" .svg)
+
+    # Convert SVG to 16x16 PNG with transparent background
+    magick "$SVG" -background none -resize 16x16 "$OUTPUT_DIR/${BASENAME}.png"
+done
+
+echo "Conversion complete. Check the $OUTPUT_DIR directory."
