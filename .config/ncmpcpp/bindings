@@ -175,7 +175,7 @@
 #  jump_to_parent_directory
 #
 #def_key "backspace"
-#  replay_song
+#  delete_playlist_items
 #
 #def_key "f"
 #  seek_forward

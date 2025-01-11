@@ -44,7 +44,7 @@ alias \
 	jp="setxkbmap jp" \
 	g="git" \
 	trem="transmission-remote" \
-	YT="youtube-viewer" \
+	synth="surge-xt-cli --audio-interface=1.0 --midi-input=1 --buffer-size=128 --sample-rate=48000" \
 	bye="shutdown -h now" \
 	e="$EDITOR" \
 	v="st -e $EDITOR &" \
