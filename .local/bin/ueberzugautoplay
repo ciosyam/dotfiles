@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# This is a function that will run for image files
-rotdir "$@" | grep -i "\.\(gif\)$" | while read -r file; do
-    echo "{\"action\":\"add\",\"identifier\":\"test_gif\",\"path\":\"$file\",\"x\":0,\"y\":0,\"scaler\":\"fit_contain\",\"loop\":true}" | ueberzugpp layer
-done
