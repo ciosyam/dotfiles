@@ -2,7 +2,7 @@
     monitor = 0
     follow = keyboard
     width = 200
-    height = 75
+    height = 200
     offset = 0x30
     padding = 1
     horizontal_padding = 1 
@@ -10,9 +10,10 @@
     font = MesloLGLMono 12
     markup = full
     frame_width = 2
+    stack_duplicates = false
 
 [urgency_low]
-    foreground = "#b814b8"
+    foreground = "#00ff00"
     background = "#000000"
     frame_color = "#b814b8"
     timeout = 5
@@ -24,7 +25,7 @@
     timeout = 10
 
 [urgency_critical]
-    foreground = "#ff00ff"
+    foreground = "#ff0039"
     background = "#000000"
     frame_color = "#b814b8"
     timeout = 15
