@@ -1,23 +1,23 @@
 #!/bin/sh
-#
-# Check if NetworkManager service is active
-if systemctl is-active --quiet NetworkManager; then
-    status_icon=" "
-else
-    status_icon=" "
-fi
 
+WIFI_INTERFACE="wlp4s0"
+
+# Check if the WiFi interface is up and set the icon
+status_icon=$(ip link show "$WIFI_INTERFACE" | grep -q "state UP" && echo " " || echo " ")
+
+# Handle button clicks
 case $BLOCK_BUTTON in
     1)
-        # Toggle NetworkManager service
-        if systemctl is-active --quiet NetworkManager; then
-            sudo systemctl stop NetworkManager
-            notify-send -u "low" " internet off"
+        # Toggle WiFi interface
+        if ip link show "$WIFI_INTERFACE" | grep -q "state UP"; then
+            sudo ip link set "$WIFI_INTERFACE" down
+            notify-send -u low " WiFi off"
         else
-            sudo systemctl start NetworkManager
-            notify-send -u "low" " internet on"
+            sudo ip link set "$WIFI_INTERFACE" up
+            notify-send -u low " WiFi on"
         fi
         pkill -RTMIN+4 dwmblocks ;;
 esac
 
+# Output the icon
 echo "$status_icon"

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Function to clear RAM caches
+clear_ram() {
+    echo "Clearing RAM caches..."
+    sync
+    echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
+    echo "RAM caches cleared."
+}
+
+# Function to clean up zombie processes
+cleanup_zombies() {
+    echo "Cleaning up zombie processes..."
+    zombies=$(ps aux | grep 'Z' | grep -v grep | awk '{print $2}')
+    if [ -n "$zombies" ]; then
+        for pid in $zombies; do
+            sudo kill -9 "$pid"
+        done
+        echo "Zombie processes killed."
+    else
+        echo "No zombie processes found."
+    fi
+}
+
+# Function to restart resource-heavy services
+restart_services() {
+    echo "Restarting resource-intensive services..."
+    services=("NetworkManager" "bluetooth")  # Add more services as needed
+    for service in "${services[@]}"; do
+        echo "Restarting $service..."
+        sudo systemctl restart "$service"
+    done
+    echo "Services restarted."
+}
+
+# Function to clean system logs
+clean_logs() {
+    echo "Cleaning up system logs..."
+    sudo journalctl --vacuum-time=2weeks
+    echo "System logs cleaned."
+}
+
+# Function to monitor resource usage
+monitor_resources() {
+    echo "Top resource-heavy processes:"
+    ps aux --sort=-%mem | head -n 10
+}
+
+# Main script
+echo "Starting system cleanup..."
+clear_ram
+cleanup_zombies
+restart_services
+clean_logs
+monitor_resources
+echo "System cleanup completed!"
