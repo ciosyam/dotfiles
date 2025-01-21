@@ -11,4 +11,4 @@ case $BLOCK_BUTTON in
 esac
 
 # Display the time with the icon
-echo "$icon $(date '+(%a) %d-%m-%y') $clock"
+echo "$icon $(date '+%d %B %Y') $clock"
