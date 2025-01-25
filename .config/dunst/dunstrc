@@ -11,21 +11,22 @@
     markup = full
     frame_width = 2
     stack_duplicates = false
+    alignment = center
 
 [urgency_low]
     foreground = "#00ff00"
     background = "#000000"
     frame_color = "#b814b8"
-    timeout = 5
+    timeout = 3
 
 [urgency_normal]
     foreground = "#00c4ff"
     background = "#000000"
     frame_color = "#b814b8"
-    timeout = 10
+    timeout = 5
 
 [urgency_critical]
     foreground = "#ff0039"
     background = "#000000"
     frame_color = "#b814b8"
-    timeout = 15
+    timeout = 10

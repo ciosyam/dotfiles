@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Function to clean up before exiting
+cleanup() {
+    exit 0
+}
+
+# Trap termination signals to call the cleanup function
+trap cleanup SIGINT SIGTERM
+
+# Options for dmenu
+options="setcharge\nfullcharge\nac\nauto"
+
+# Prompt user to select an option
+choice=$(echo -e "$options" | dmenu -i -p " TLP:")
+
+# Function to execute the command and send notification
+run_command() {
+    local command_output
+    command_output=$(sudo tlp "$1" "$2" "$3" 2>&1) # Capture both stdout and stderr
+    if [ $? -eq 0 ]; then
+        notify-send -r 1423 " TLP set" "$command_output"
+    else
+        notify-send -r 1423 " TLP failed" "$command_output"
+    fi
+}
+
+# Execute the selected option
+case "$choice" in
+    setcharge)
+        run_command "setcharge" 65 75
+        ;;
+    fullcharge)
+        run_command "fullcharge"
+        ;;
+    ac)
+        run_command "ac"
+        ;;
+    auto)
+        run_command "auto"
+        ;;
+    *)
+        # If no valid option is chosen, exit gracefully
+        cleanup
+        ;;
+esac
+
+# Final cleanup in case of normal exit
+cleanup

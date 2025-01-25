@@ -2,7 +2,12 @@
 
 # Rerun the remaps script whenever a new input device is added.
 
+# Trap EXIT, INT, and TERM signals to exit gracefully
+trap "exit 0" EXIT INT TERM
+
 while :; do
 	remaps
 	grep -qP -m1 '[^un]bind.+\/[^:]+\(usb\)' <(udevadm monitor -u -t seat -s input -s usb)
 done
+
+exit 0

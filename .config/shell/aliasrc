@@ -14,9 +14,11 @@ for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
 done; unset command
 
 se() {
-	choice="$(find ~/.local/bin -mindepth 1 -printf '%P\n' | fzf)"
-	[ -f "$HOME/.local/bin/$choice" ] && $EDITOR "$HOME/.local/bin/$choice"
-	;}
+    choice="$(find . -type f -exec file --mime {} + 2>/dev/null | grep 'text/' | cut -d: -f1 | fzf --prompt='Search text files: ')"
+    if [ -n "$choice" ]; then
+        $EDITOR "$choice"
+    fi
+}
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
@@ -33,7 +35,7 @@ alias \
 
 # Colorize commands when possible.
 alias \
-	ls="ls -hN --color=auto --group-directories-first" \
+	exa="exa --color=auto --group-directories-first" \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi" \
@@ -44,7 +46,6 @@ alias \
 	jp="setxkbmap jp" \
 	g="git" \
 	trem="transmission-remote" \
-	synth="surge-xt-cli --audio-interface=1.0 --midi-input=1 --buffer-size=128 --sample-rate=48000" \
 	bye="shutdown -h now" \
 	e="$EDITOR" \
 	v="st -e $EDITOR &" \

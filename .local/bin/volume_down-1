@@ -7,4 +7,4 @@ wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-
 volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '/Volume/ {print $5}')
 
 # Display a notification with low urgency and replace old ones
-notify-send -r 111 "Volume: $volume"
+notify-send -r 111 " Volume: $volume"

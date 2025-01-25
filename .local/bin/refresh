@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Ask user for confirmation using dmenu
+choice=$(echo -e "Yes\nNo" | dmenu -i -p " Refresh system?")
+
+# Exit if the user selects "No" or closes the menu
+if [[ "$choice" != "Yes" ]]; then
+    notify-send -r 1134 " Exiting..."
+    exit 0
+fi
+
 # Function to clear RAM caches
 clear_ram() {
     echo "Clearing RAM caches..."
@@ -46,11 +55,14 @@ monitor_resources() {
     ps aux --sort=-%mem | head -n 10
 }
 
-# Main script
+# Run the cleanup tasks
 echo "Starting system cleanup..."
 clear_ram
 cleanup_zombies
 restart_services
 clean_logs
 monitor_resources
-echo "System cleanup completed!"
+
+notify-send -r 1134 " System Cleanup Completed!"
+
+exit 0

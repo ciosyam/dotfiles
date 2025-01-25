@@ -5,10 +5,10 @@ WIFI_INTERFACE="wlp4s0"
 # Check if the WiFi interface is up
 if ip link show "$WIFI_INTERFACE" | grep -q "state UP"; then
     action="down"
-    notify=" internet off"
+    notify=" Internet Off"
 else
     action="up"
-    notify=" internet on"
+    notify=" Internet On"
 fi
 
 # Toggle the WiFi interface
@@ -20,3 +20,5 @@ fi
 
 # Notify the status bar
 sleep 3 && pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}"
+
+exit 0

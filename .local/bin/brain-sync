@@ -8,6 +8,6 @@ BASE_URL="http://127.0.0.1:8384"
 # Trigger sync for all folders
 curl -X POST -H "X-API-Key: ${API_KEY}" "${BASE_URL}/rest/db/scan?folder="
 
-notify-send -u "low" "🧠 Synced"
+notify-send -r 1313 "🧠 Brain Synced"
 
 exit 0

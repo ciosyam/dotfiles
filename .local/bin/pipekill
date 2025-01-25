@@ -1,9 +1,14 @@
 #!/bin/bash
 
+# Trap EXIT, INT, and TERM signals to exit gracefully
+trap "exit 0" EXIT INT TERM
+
 pidof pipewire | awk '{print $2}' | xargs kill
 
 if pipewire; then
-    notify-send "🎵 pipe killed successfully"
+    notify-send "🎵 Pipe Killed Successfully"
 else
-    notify-send "⚠️  pipekill failed"
+    notify-send "⚠️  Pipekill Failed"
 fi
+
+exit 0
