@@ -7,8 +7,8 @@ clock=$(date '+%I:%M %p')
 
 case $BLOCK_BUTTON in
   	1) notify-send "This Month" "$(cal | sed "s/\<$(date +'%e')\>/<b><span color='red'>&<\/span><\/b>/")" && notify-send "Appointments" "$(calcurse -d3)" ;;
-    2) setsid -f "$TERMINAL" -e calcurse ;;
+    2) setsid -f "$TERMINAL" -n floatterm -e calcurse ;;
 esac
 
 # Display the time with the icon
-echo "$icon $(date '+%d %B %Y') $clock"
+ echo "$icon $(date '+%d %B %Y') $clock"

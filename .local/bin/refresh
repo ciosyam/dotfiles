@@ -34,7 +34,7 @@ cleanup_zombies() {
 # Function to restart resource-heavy services
 restart_services() {
     echo "Restarting resource-intensive services..."
-    services=("NetworkManager" "bluetooth")  # Add more services as needed
+    services=("NetworkManager" "sshd")  # Add more services as needed
     for service in "${services[@]}"; do
         echo "Restarting $service..."
         sudo systemctl restart "$service"
