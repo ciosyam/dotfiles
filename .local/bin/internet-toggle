@@ -1,24 +1,24 @@
 #!/bin/sh
 
-WIFI_INTERFACE="wlp4s0"
+ctl=$(readlink -f /sbin/init | grep -q systemd && echo systemctl || echo loginctl)
 
-# Check if the WiFi interface is up
-if ip link show "$WIFI_INTERFACE" | grep -q "state UP"; then
-    action="down"
-    notify=" Internet Off"
+# Check if NetworkManager is running
+if pgrep -x NetworkManager &> /dev/null; then
+    action="stop"
+    notify=" internet off"
+    urgency="low"
 else
-    action="up"
-    notify=" Internet On"
+    action="start"
+    notify=" internet on"
+    urgency="low"
 fi
 
-# Toggle the WiFi interface
-if sudo ip link set "$WIFI_INTERFACE" "$action"; then
-    notify-send -r 222 "$notify"
+# Toggle the NetworkManager service
+if sudo $ctl $action NetworkManager.service; then
+    notify-send -u "$urgency" "$notify"
 else
-    notify-send -r 222 "Error" "Failed to execute the command."
+    notify-send -u "low" "Error" "Failed to execute the command."
 fi
 
 # Notify the status bar
 sleep 3 && pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}"
-
-exit 0

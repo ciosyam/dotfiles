@@ -1,4 +1,13 @@
 #!/bin/sh
 
-# Open st, run yazi, and keep the terminal open with zsh
-st -e zsh -c 'yazi; exec zsh'
+# Open st, define yy function, run it, and keep the terminal open
+st -e zsh -c '
+yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+yy; exec zsh'
