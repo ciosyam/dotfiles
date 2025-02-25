@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Open st, define yy function, run it, and keep the terminal open
-st -e zsh -c '
+# Open st with a specific instance name, define yy function, run it, and keep the terminal open
+st -n floatyeay -e zsh -c '
 yy() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     yazi "$@" --cwd-file="$tmp"
