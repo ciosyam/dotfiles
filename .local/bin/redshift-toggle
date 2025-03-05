@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if pgrep -x redshift >/dev/null; then
+    pkill redshift
+    notify-send -r 1452 "🔆 DAY"
+else
+    redshift -l 0.02:109.34 -t 6500:3000 -r & disown
+    notify-send -r 1452 "🌙 NIGHT"
+fi

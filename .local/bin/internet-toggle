@@ -5,19 +5,17 @@ ctl=$(readlink -f /sbin/init | grep -q systemd && echo systemctl || echo loginct
 # Check if NetworkManager is running
 if pgrep -x NetworkManager &> /dev/null; then
     action="stop"
-    notify=" internet off"
-    urgency="low"
+    notify=" internet off"
 else
     action="start"
-    notify=" internet on"
-    urgency="low"
+    notify=" internet on"
 fi
 
 # Toggle the NetworkManager service
 if sudo $ctl $action NetworkManager.service; then
-    notify-send -u "$urgency" "$notify"
+    notify-send -r 1133 "$notify"
 else
-    notify-send -u "low" "Error" "Failed to execute the command."
+    notify-send -r 1133 "Error" "Failed to execute the command."
 fi
 
 # Notify the status bar
