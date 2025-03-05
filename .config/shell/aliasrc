@@ -39,6 +39,7 @@ alias \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi" \
+  ls="exa --color=auto --group-directories-first" \
 	ip="ip -color=auto"
 
 # These common commands are just too long! Abbreviate them.
@@ -56,7 +57,7 @@ alias \
 	z="zathura" \
 
 alias \
-	lf="lfub" \
+	mpvn="mpv --no-video" \
 	magit="nvim -c MagitOnly" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
 	weath="less -S ${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport" \

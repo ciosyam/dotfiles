@@ -21,7 +21,6 @@ wrap            = "yes"
 tab_size        = 2
 max_width       = 600
 max_height      = 900
-cache_dir       = ".cache/ueberzugpp/"
 image_delay     = 30
 image_filter    = "triangle"
 image_quality   = 75
@@ -131,7 +130,7 @@ previewers = [
 ]
 
 [input]
-cursor_blink = false
+cursor_blink = true
 
 # cd
 cd_title  = "Change directory:"
@@ -204,9 +203,3 @@ sort_translit  = false
 
 [log]
 enabled = false
-
-[mime-types]
-"image/gif" = ["play-gif"]
-
-[commands]
-play-gif = "~/.local/bin/ueberzugppautoplay"
